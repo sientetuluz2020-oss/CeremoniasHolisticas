@@ -438,27 +438,66 @@
     }
     .video-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 1rem;
       margin-top: 1.25rem;
     }
+    @media(max-width:760px){ .video-grid { grid-template-columns: 1fr 1fr; } }
     @media(max-width:520px){ .video-grid { grid-template-columns: 1fr; } }
-    .video-wrap {
+    .video-card {
+      display: block; text-decoration: none;
+      background: #fffaf3;
+      border: 1px solid #e0b880;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px -22px rgba(46,31,14,.45);
+      transition: transform .35s, box-shadow .35s;
+    }
+    .video-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -22px rgba(46,31,14,.5); }
+    .video-thumb {
       position: relative;
       width: 100%;
-      padding-top: 177%;
-      border-radius: 12px;
+      aspect-ratio: 16/9;
       overflow: hidden;
-      background: #1a0f35;
+      background: linear-gradient(135deg, #2e2150, #1a0f35);
     }
-    .video-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border-radius: 12px;
-      border: none;
+    .video-thumb img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    .video-tag {
+    .video-thumb::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(26,15,53,.05), rgba(26,15,53,.5));
+    }
+    .video-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 2;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(255,250,243,.94); border: 1px solid #e0b880;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 26px -8px rgba(46,31,14,.6); transition: transform .3s;
+    }
+    .video-card:hover .video-play { transform: translate(-50%,-50%) scale(1.08); }
+    .video-play::before {
+      content: ""; display: block; width: 0; height: 0; margin-left: 5px;
+      border-style: solid; border-width: 11px 0 11px 18px;
+      border-color: transparent transparent transparent #8b4a10;
+    }
+    .video-info { padding: 16px 16px; text-align: center; }
+    .video-info .v-nombre {
+      font-family: Arial, sans-serif; font-size: 15px; color: #2e1f0e; font-weight: 600;
+      margin-bottom: 10px; text-decoration: none;
+    }
+    .video-info .v-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: Arial, sans-serif; font-size: 12px; letter-spacing: .08em;
+      text-transform: uppercase; font-weight: 600; color: #8b4a10;
+      border: 1px solid #d6a868; border-radius: 50px; padding: 8px 18px; transition: .3s;
+    }
+    .video-card:hover .v-link { background: #8b4a10; color: #fff; border-color: #8b4a10; }
+    .video-nota {
+      text-align: center; margin-top: 1.25rem;
+      font-family: Arial, sans-serif; font-size: 13px; color: #6b5040; font-style: italic;
+    }
       font-family: Arial, sans-serif;
       font-size: 11px;
       letter-spacing: 0.14em;
@@ -660,30 +699,6 @@
       line-height: 1.65;
     }
 
-    /* VIDEO GRID */
-    .video-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    @media(max-width:520px){ .video-grid { grid-template-columns: 1fr; } }
-    .video-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 177%;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #1a0f35;
-    }
-    .video-wrap iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 12px;
-    }
     hr.div { border: none; border-top: 1px solid #dfc9b0; margin: 2.5rem 0; }
 
     .escasez {
@@ -1108,29 +1123,40 @@
     <div class="video-tag">🎥 Testimonios en video</div>
     <div class="video-h">Escucha directamente a quienes ya se formaron</div>
     <p style="font-family:Arial,sans-serif;font-size:14px;color:#6b5040;line-height:1.6;">Estas son algunas de las personas que ya tomaron el curso y quieren contarte su experiencia en sus propias palabras.</p>
+    <!-- Tarjetas de testimonio en video: miniatura de YouTube + enlace que abre el video en nueva pestaña.
+         Para reemplazar un video, cambia el ID de YouTube en la miniatura (i.ytimg.com/vi/ID/hqdefault.jpg)
+         y en el enlace (youtube.com/watch?v=ID). -->
     <div class="video-grid">
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/Q_l3WolIHtU" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/-6UhndKsGb8" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/u34LB4u3d5U" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/HF9Ue7Ttn_Y" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/gokLWsZ6rR8" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/mDoZPH0xJv0" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/cigrz-mjzXo" frameborder="0" allowfullscreen></iframe>
-      </div>
+      <a class="video-card" href="https://www.youtube.com/watch?v=Q_l3WolIHtU" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/Q_l3WolIHtU/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=-6UhndKsGb8" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/-6UhndKsGb8/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=u34LB4u3d5U" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/u34LB4u3d5U/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=HF9Ue7Ttn_Y" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/HF9Ue7Ttn_Y/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=gokLWsZ6rR8" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/gokLWsZ6rR8/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=mDoZPH0xJv0" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/mDoZPH0xJv0/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=cigrz-mjzXo" target="_blank" rel="noopener">
+        <div class="video-thumb"><img src="https://i.ytimg.com/vi/cigrz-mjzXo/hqdefault.jpg" alt="Testimonio en video · Ceremonias Holísticas" loading="lazy"><span class="video-play"></span></div>
+        <div class="video-info"><div class="v-nombre">Testimonio en video</div><span class="v-link">▶ Ver testimonio</span></div>
+      </a>
     </div>
+    <p class="video-nota">Los videos se abren en una nueva pestaña para una mejor reproducción en celular.</p>
   </div>
 
   <hr class="div">
